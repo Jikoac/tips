@@ -1,0 +1,40 @@
+from classes import *
+types=conv(
+    {'yes or no':tbool,'':tclass,'weighed generator':twrs},
+    random=trandom,
+    ran=trandom,
+    string=tstring,
+    str=tstring,
+    number=tnumber,
+    num=tnumber,
+    set=tset,
+    classless=tclass,
+    base=tclass,
+    baseless=tclass,
+    none=tclass,
+    null=tclass,
+    void=tclass,
+    boolean=tbool,
+    bool=tbool,
+    gen=trandom,
+    generator=trandom,
+    text=tstring,
+    words=tstring,
+    word=tstring,
+    list=tset,
+    array=tset,
+    keyset=tkeyset,
+    key=tkeyset,
+    wrs=twrs,
+    weighed=twrs
+)
+constants=conv(
+    void=void,
+    yes=tbool([1]),
+    no=tbool([0]),
+    comma=tstring([',']),
+    space=tstring([' ']),
+    _=void
+)
+globals=conv()
+variables:dict[str,tclass]=conv()
