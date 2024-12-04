@@ -5,6 +5,7 @@ import sys
 sys.dont_write_bytecode=True
 
 def conv(__base__:dict={},**items):
+    __base__={} or __base__
     __base__.update(items)
     return __base__
 
@@ -123,3 +124,28 @@ class twrs(tclass):
                 output.append(f'{key}={val}')
             return ', '.join(output)
         return self.value[index]
+class tfunction(tclass):
+    type='function'
+    def __init__(self,name='',args=[]):
+        self.lines=[]
+        self.args=dict.fromkeys(args)
+        self.name=name
+    def add_line(self,line:str):
+        self.lines.append(line[1:])
+    def __call__(self,*args):
+        from processor import run
+        self.args=dict.fromkeys(list(self.args))
+        args=dict(zip(self.args,args))
+        self.args.update(args)
+        prev=run.current_function
+        run.current_function=self.name
+        value=run('\n'.join(self.lines),silent=True)
+        run.current_function=prev
+        return value
+
+class t__no_function__(tfunction):
+    def add_line(self, line: str):
+        raise NameError('No function defined!')
+
+def tinput(text:str=''):
+    return input(text)

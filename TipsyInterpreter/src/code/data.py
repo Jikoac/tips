@@ -37,4 +37,4 @@ constants=conv(
     _=void
 )
 globals=conv()
-variables:dict[str,tclass]=conv()
+variables:dict[str,tclass|tfunction]={}
